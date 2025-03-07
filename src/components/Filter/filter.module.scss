@@ -1,0 +1,106 @@
+.allFilters {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 35px;
+  row-gap: 18px;
+}
+
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.checkboxSection {
+  display: flex;
+  column-gap: 20px;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+}
+
+.customCheckbox {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background: white;
+  margin-right: 7px;
+  border-radius: 5px; 
+  border: 1px solid grey;
+}
+
+.customCheckbox::before {
+  content: "";
+  top: 1px;
+  left: 1px;
+  position: absolute;
+  background-image: url("../../assets/check.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  display: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px; 
+}
+
+.check:checked + .customCheckbox::before { display: block; }
+
+.numberSection {
+  display: flex;
+  column-gap: 15px;
+}
+
+.dataSection {
+  display: flex;
+  column-gap: 15px;
+}
+
+.filterNumber {
+  width: 100px;
+  height: 25px;
+  color: rgb(191, 191, 191);
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  padding: 4px;
+  font-size: 10px;
+}
+
+.filterData {
+  width: 100px;
+  height: 25px;
+  color: rgb(191, 191, 191);
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  padding: 4px;
+  font-size: 10px;
+}
+
+.filterNumber::placeholder {
+  color: currentColor;
+}
+
+.filterNumber:focus {
+  outline: none;
+  border-color: grey;
+}
+
+.filterNumber::-webkit-inner-spin-button, 
+.filterNumber::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.filterNumber {
+  -moz-appearance: textfield;
+}
+
