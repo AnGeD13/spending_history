@@ -2,17 +2,30 @@ import styles from "./table.module.scss";
 import { getHoursAndMinutes } from "../../utils/getHourAndMinutes";
 import { getDayAndMonth } from "../../utils/getDayAndMonth";
 
-// TODO time button
-export default function Table({transactions}) {
+
+export default function Table({transactions, changeSortOrder}) {
+  const NoTransactions = Object.values(transactions).every(items => items.length === 0);
+
+  const onHandleChangeSort = (event) => {
+    event.target.classList.toggle(styles.sortDesc);
+    changeSortOrder();
+  }
+
   return (
     <div className={styles.tableWrapper}>
       <div className={styles.table}>
         <div className={styles.thead}>
-          <p className={styles.leftHeading}>Время</p>
+          <p className={styles.leftHeading}>
+            Время{' '}
+            <button className={styles.btnChangeSort} onClick={onHandleChangeSort}></button>
+          </p>
           <p className={styles.centerHeading}>Описание</p>
           <p className={styles.rightHeading}>Сумма</p>
         </div>
-        {Object.entries(transactions).map(([day, items], index) => {
+        {NoTransactions &&
+          <p className={styles.nothingFound}>Ничего не найдено</p>
+        }
+        {!NoTransactions && Object.entries(transactions).map(([day, items], index) => {
           if (items.length > 0) {
             return (
             <div key={day}>
@@ -31,8 +44,8 @@ export default function Table({transactions}) {
               </ul>
             </div>)
             }
-            return null;
-        })}
+          })
+        }
       </div>
     </div>
   )

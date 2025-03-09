@@ -1,15 +1,18 @@
 import TransactionTypes from "../TransactionTypes/TransactionTypes";
 import styles from "./filter.module.scss";
+import { validateNumberInput } from "../../utils/validateNumberInput";
 
-export default function Filter({setMinSum, setMaxSum, selectedTypes, setSelectedTypes}) {
-  const getMinSum = (event) => {
-    // console.log(+event);
-    setMinSum(+event);
-  };
+
+export default function Filter({setMinSum, setMaxSum, selectedTypes, setSelectedTypes}) {  
 
   const getMaxSum = (event) => {
-    // console.log(+event);
-    setMaxSum(+event);
+    // console.log(+event.target.value);
+    setMaxSum(+event.target.value);
+  };
+
+  const getMinSum = (event) => {
+    // console.log(+event.target.value);
+    setMinSum(+event.target.value);
   };
 
   return (
@@ -23,13 +26,15 @@ export default function Filter({setMinSum, setMaxSum, selectedTypes, setSelected
               className={styles.filterNumber}
               type="number" 
               placeholder="От"
-              onChange={(event) => getMinSum(event.target.value)}
+              onKeyDown={validateNumberInput}
+              onChange={getMinSum}
             />
             <input 
               className={styles.filterNumber}
               type="number" 
               placeholder="До"
-              onChange={(event) => getMaxSum(event.target.value)}
+              onKeyDown={validateNumberInput}
+              onChange={getMaxSum}
             />
           </div>
         </section>

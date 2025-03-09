@@ -2,31 +2,30 @@ import { useEffect, useState } from 'react';
 import Title from "../components/Title/Title"
 import Filter from '../components/Filter/Filter';
 import Table from '../components/Table/Table';
-import data from "../data/transactions.json";
+import { groupedByDay, sortedDaysAsc, sortedDaysDesc } from '../utils/groupingAndSortData';
 import styles from './app.module.scss';
+
 
 export default function App() {
   const [transactions, setTransactions] = useState({});
   const [minSum, setMinSum] = useState(0);
   const [maxSum, setMaxSum] = useState(null);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [sortOrder, setSortOrder] = useState(sortedDaysAsc);
+
+  const changeSortOrder = () => {
+    if (sortOrder === sortedDaysAsc) {
+      setSortOrder(sortedDaysDesc);
+    }
+    else {
+      setSortOrder(sortedDaysAsc);
+    }
+  }
 
   useEffect(() => {
-    const groupedByDay = data.reduce((acc, item) => {
-      const date = new Date(item.date);
-      const day = date.toISOString().split('T')[0];
-    
-      if (!acc[day]) {
-        acc[day] = [];
-      }
-    
-      acc[day].push(item);
-    
-      return acc;
-    }, {});
-
     const filteredTransactions = Object.fromEntries(
-      Object.entries(groupedByDay).map(([day, items]) => {
+      sortOrder.map(day => {
+        const items = groupedByDay[day];
         const filteredItems = items.filter(item =>
           (Math.abs(item.sum) >= minSum) &&
           (maxSum === null || Math.abs(item.sum) <= maxSum) && 
@@ -38,7 +37,7 @@ export default function App() {
     );
 
     setTransactions(filteredTransactions);
-  }, [minSum, maxSum, selectedTypes])
+  }, [minSum, maxSum, selectedTypes, sortOrder])
 
   return (
     <div className={styles.block}>
@@ -47,8 +46,12 @@ export default function App() {
         setMinSum={setMinSum} 
         setMaxSum={setMaxSum} 
         selectedTypes={selectedTypes}
-        setSelectedTypes={setSelectedTypes}/>
-      <Table transactions={transactions}/>
+        setSelectedTypes={setSelectedTypes}
+      />
+      <Table 
+        transactions={transactions}
+        changeSortOrder={changeSortOrder}
+      />
     </div>
   )
 }

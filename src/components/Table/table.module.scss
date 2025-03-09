@@ -69,3 +69,24 @@
 .rightLine {
   text-align: right;
 }
+
+.nothingFound {
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+}
+
+.btnChangeSort {
+  width: 10px;
+  height: 10px;
+  border: none;
+  background-image: url("../../assets/triangle.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; 
+  cursor: pointer;
+}
+
+.sortDesc {
+  transform: rotate(180deg);
+}
