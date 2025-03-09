@@ -1,6 +1,7 @@
+import TransactionTypes from "../TransactionTypes/TransactionTypes";
 import styles from "./filter.module.scss";
 
-export default function Filter({setMinSum, setMaxSum}) {
+export default function Filter({setMinSum, setMaxSum, selectedTypes, setSelectedTypes}) {
   const getMinSum = (event) => {
     // console.log(+event);
     setMinSum(+event);
@@ -45,47 +46,10 @@ export default function Filter({setMinSum, setMaxSum}) {
             />
           </div>
         </section>
-        <section className={styles.checkboxGroup}>
-          <h3>Тип операции</h3>
-          <section className={styles.checkboxSection}>
-            <label className={styles.checkLabel}>
-              <input 
-                type="checkbox" 
-                hidden 
-                className={styles.check}
-              />
-              <span className={styles.customCheckbox}></span>
-              Поднятие
-            </label>
-            <label className={styles.checkLabel}>
-              <input 
-                type="checkbox" 
-                hidden 
-                className={styles.check}
-              />
-              <span className={styles.customCheckbox}></span>
-              Комиссия
-            </label>
-            <label className={styles.checkLabel}>
-              <input 
-                type="checkbox" 
-                hidden 
-                className={styles.check}
-              />
-              <span className={styles.customCheckbox}></span>
-              Пополнение
-            </label>
-            <label className={styles.checkLabel}>
-              <input 
-                type="checkbox" 
-                hidden 
-                className={styles.check}
-              />
-              <span className={styles.customCheckbox}></span>
-              Отмена платежа
-            </label>
-          </section>
-        </section>
+        <TransactionTypes
+          selectedTypes={selectedTypes}
+          setSelectedTypes={setSelectedTypes}
+        />
       </section>
     </div>
   )

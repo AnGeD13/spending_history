@@ -11,50 +11,6 @@
   row-gap: 10px;
 }
 
-.checkboxGroup {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-}
-
-.checkboxSection {
-  display: flex;
-  column-gap: 20px;
-}
-
-.checkLabel {
-  display: flex;
-  align-items: center;
-}
-
-.customCheckbox {
-  position: relative;
-  width: 14px;
-  height: 14px;
-  background: white;
-  margin-right: 7px;
-  border-radius: 5px; 
-  border: 1px solid grey;
-}
-
-.customCheckbox::before {
-  content: "";
-  top: 1px;
-  left: 1px;
-  position: absolute;
-  background-image: url("../../assets/check.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  box-sizing: border-box;
-  display: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px; 
-}
-
-.check:checked + .customCheckbox::before { display: block; }
-
 .numberSection {
   display: flex;
   column-gap: 15px;

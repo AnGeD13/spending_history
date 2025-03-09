@@ -1,15 +1,15 @@
-import styles from './app.module.scss';
-import data from "../data/transactions.json";
+import { useEffect, useState } from 'react';
 import Title from "../components/Title/Title"
 import Filter from '../components/Filter/Filter';
 import Table from '../components/Table/Table';
-import { useEffect, useState } from 'react';
+import data from "../data/transactions.json";
+import styles from './app.module.scss';
 
-
-function App() {
+export default function App() {
   const [transactions, setTransactions] = useState({});
   const [minSum, setMinSum] = useState(0);
   const [maxSum, setMaxSum] = useState(null);
+  const [selectedTypes, setSelectedTypes] = useState([]);
 
   useEffect(() => {
     const groupedByDay = data.reduce((acc, item) => {
@@ -25,12 +25,12 @@ function App() {
       return acc;
     }, {});
 
-    // Теперь применяем фильтр по сумме
     const filteredTransactions = Object.fromEntries(
       Object.entries(groupedByDay).map(([day, items]) => {
         const filteredItems = items.filter(item =>
           (Math.abs(item.sum) >= minSum) &&
-          (maxSum === null || Math.abs(item.sum) <= maxSum)
+          (maxSum === null || Math.abs(item.sum) <= maxSum) && 
+          (selectedTypes.length === 0 || selectedTypes.includes(item.transactionType))
         );
         
         return [day, filteredItems];
@@ -38,33 +38,17 @@ function App() {
     );
 
     setTransactions(filteredTransactions);
-    console.log("min max", minSum, maxSum);
-    // setTransactions(groupedByDay);
-  }, [minSum, maxSum])
-
-  // useEffect(() => {
-  //   const filteredTransactions = Object.fromEntries(
-  //     Object.entries(transactions).map(([day, items]) => {
-  //       const filteredItems = items.filter(item => 
-  //         (minSum === null || Math.abs(item.sum) >= minSum) &&
-  //         (maxSum === null || Math.abs(item.sum) <= maxSum)
-  //       );
-
-  //       return [day, filteredItems];
-  //     })
-  //   )
-
-  //   setTransactions(filteredTransactions);
-  // }, [minSum, maxSum])
-
+  }, [minSum, maxSum, selectedTypes])
 
   return (
     <div className={styles.block}>
       <Title/>
-      <Filter setMinSum={setMinSum} setMaxSum={setMaxSum}/>
+      <Filter  
+        setMinSum={setMinSum} 
+        setMaxSum={setMaxSum} 
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}/>
       <Table transactions={transactions}/>
     </div>
   )
 }
-
-export default App
