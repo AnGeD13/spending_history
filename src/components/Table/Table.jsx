@@ -1,7 +1,7 @@
 import { getHoursAndMinutes } from "../../utils/getHourAndMinutes";
 import { getDayAndMonth } from "../../utils/getDayAndMonth";
-import { useState } from "react";
 import styles from "./table.module.scss";
+import Pagination from "../Pagination/Pagination";
 
 
 const getPaginatedData = (data, currentPage, itemsPerPage) => {
@@ -10,11 +10,13 @@ const getPaginatedData = (data, currentPage, itemsPerPage) => {
   return data.slice(startIndex, endIndex);
 }
 
-export default function Table({transactions, changeSortOrder}) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function Table({
+  currentPage, setCurrentPage, transactions, changeSortOrder
+}) {
   const itemsPerPage = 30;
 
   const flatItems = Object.values(transactions).flat();
+  const totalPages = Math.ceil(flatItems.length / itemsPerPage);
   const paginatedItems = getPaginatedData(flatItems, currentPage, itemsPerPage);
 
   const groupedByDate = paginatedItems.reduce((acc, item) => {
@@ -35,34 +37,13 @@ export default function Table({transactions, changeSortOrder}) {
     changeSortOrder();
   }
 
-  const handleNextPage = () => {
-    if (currentPage < Math.ceil(flatItems.length / itemsPerPage)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
   return (
     <>
-      <div className={styles.pagination}>
-        <button 
-          className={styles.paginationBtn}
-          onClick={handlePrevPage}
-        >
-          {'<'}
-        </button>
-        <button 
-          className={styles.paginationBtn}
-          onClick={handleNextPage}
-        >
-          {'>'}
-        </button>
-      </div>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
       <div className={styles.tableWrapper}>
         <div className={styles.table}>
           <div className={styles.thead}>

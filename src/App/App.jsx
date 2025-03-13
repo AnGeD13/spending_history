@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import Title from "../components/Title/Title"
-import Filter from '../components/Filters/Filters/Filters';
+import Filters from '../components/Filters/Filters/Filters';
 import Table from '../components/Table/Table';
 import { groupedByDay, sortedDaysAsc, sortedDaysDesc } from '../utils/groupingAndSortData';
 import styles from './app.module.scss';
 
+const INITIAL_PAGE = 1;
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const [transactions, setTransactions] = useState({});
   const [minSum, setMinSum] = useState(0);
   const [maxSum, setMaxSum] = useState(null);
@@ -41,12 +43,13 @@ export default function App() {
     );
 
     setTransactions(filteredTransactions);
+    setCurrentPage(INITIAL_PAGE);
   }, [minSum, maxSum, firstDate, lastDate, selectedTypes, sortOrder])
 
   return (
     <div className={styles.block}>
       <Title/>
-      <Filter  
+      <Filters  
         setMinSum={setMinSum} 
         setMaxSum={setMaxSum} 
         selectedTypes={selectedTypes}
@@ -55,6 +58,8 @@ export default function App() {
         setLastDate={setLastDate}
       />
       <Table 
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         transactions={transactions}
         changeSortOrder={changeSortOrder}
       />

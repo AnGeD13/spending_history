@@ -4,7 +4,7 @@ import SumFilter from "../SumFilter/SumFilter";
 import styles from "./filters.module.scss";
 
 
-export default function Filter({
+export default function Filters({
   setMinSum, setMaxSum, selectedTypes, setSelectedTypes,
   setFirstDate, setLastDate
 }) {  
