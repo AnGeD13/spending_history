@@ -10,7 +10,7 @@ export default function Filters({
 }) {  
 
   return (
-    <div>
+    <section className={styles.filters}>
       <h2>Фильтры</h2>
       <section className={styles.allFilters}>
         <SumFilter
@@ -26,6 +26,6 @@ export default function Filters({
           setSelectedTypes={setSelectedTypes}
         />
       </section>
-    </div>
+    </section>
   )
 }

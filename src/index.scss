@@ -1,11 +1,12 @@
 @import url("./styles/_reset.scss");
 @import url("./styles/_fonts.scss");
+@import url("./styles/_theme.scss");
 
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  height: 100vh;
-  width: 100vw;
+  color: var(--color);
+  background-color: var(--body-bg);
 }
 
 h1 {
@@ -22,4 +23,26 @@ h2 {
 
 h3 {
   font-size: 16px;
+}
+
+@media (max-width: 700px) {
+  body {
+    background-color: var(--body-bg-mb);
+  }
+  
+  h1 {
+    font-size: 34px;
+    letter-spacing: 2.5px;
+  }
+  
+  h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    letter-spacing: 0.35px;
+  }
 }

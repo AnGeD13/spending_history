@@ -1,4 +1,5 @@
-import data from "@data/transactions.json";
+const response = await fetch('http://localhost:3000/transactions');
+const transactions = await response.json();
 
 export function groupData(data) {
   return data.reduce((acc, item) => {
@@ -16,7 +17,7 @@ export function groupData(data) {
   }, {});
 }
 
-export const groupedByDay = groupData(data);
+export const groupedByDay = groupData(transactions);
 
 export const sortedDaysAsc = Object.keys(groupedByDay).sort((a, b) => new Date(a) - new Date(b));
 export const sortedDaysDesc = Object.keys(groupedByDay).sort((a, b) => new Date(b) - new Date(a));

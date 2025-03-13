@@ -6,13 +6,20 @@
 
 .paginationList {
   display: flex;
+  column-gap: 5px;
 }
 
 .currentPage {
-  background-color: lightgray;
+  background-color: var(--pagination-current-page);
 }
 
 .paginationItem {
   background-color: transparent;
   border: none;
+}
+
+@media (max-width: 700px) {
+  .pagination {
+    padding-right: 16px;
+  }
 }

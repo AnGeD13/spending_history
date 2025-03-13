@@ -9,6 +9,7 @@ import {
   INITIAL_LAST_DATE
 } from '@data/constants';
 import styles from './app.module.scss';
+import ThemeChanging from '@components/ThemeChanging/ThemeChanging';
 
 
 export default function App() {
@@ -51,22 +52,25 @@ export default function App() {
   }, [minSum, maxSum, firstDate, lastDate, selectedTypes, sortOrder])
 
   return (
-    <div className={styles.block}>
-      <Title/>
-      <Filters  
-        setMinSum={setMinSum} 
-        setMaxSum={setMaxSum} 
-        selectedTypes={selectedTypes}
-        setSelectedTypes={setSelectedTypes}
-        setFirstDate={setFirstDate}
-        setLastDate={setLastDate}
-      />
-      <Table 
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        transactions={transactions}
-        changeSortOrder={changeSortOrder}
-      />
-    </div>
+    <>
+      <ThemeChanging/>
+      <div className={styles.block}>
+        <Title/>
+        <Filters  
+          setMinSum={setMinSum} 
+          setMaxSum={setMaxSum} 
+          selectedTypes={selectedTypes}
+          setSelectedTypes={setSelectedTypes}
+          setFirstDate={setFirstDate}
+          setLastDate={setLastDate}
+        />
+        <Table 
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          transactions={transactions}
+          changeSortOrder={changeSortOrder}
+        />
+      </div>
+    </>
   )
 }

@@ -1,5 +1,9 @@
+import styles from "./title.module.scss";
+
 export default function Title() {
   return (
-    <h1>Платежи</h1>
+    <header className={styles.header}>
+      <h1>Платежи</h1>
+    </header>
   )
 }

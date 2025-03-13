@@ -6,17 +6,11 @@
   padding: 20px;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-}
-
-.itemGroup {
-  background-color: lightblue;
-}
-
-.itemData {
-  display: flex;
-  justify-content: space-between;
+@media (max-width: 700px) {
+  .block {
+    width: 90%;
+    margin-block: 35px;
+    padding: 0;
+    background-color: var(--content-bg-mb);
+  }
 }

@@ -1,0 +1,32 @@
+[data-theme="light"] {
+  --body-bg: white;
+  --color: black;
+  --body-bg-mb: rgb(242, 242, 242);
+  --content-bg-mb: white;
+  --table-bg: rgb(242, 242, 242);
+  --thead-line: rgb(218, 218, 218);
+  --table-day: rgb(230, 230, 230);
+  --pagination-current-page: lightgray;
+  --input-color: rgb(191, 191, 191);
+  --input-outline: grey;
+  --color-primary: rgb(73, 73, 73);
+  --color-btn-theme: var(--color-primary);
+  --color-btn-theme-border: var(--color-primary);
+  --color-btn-theme-in: rgba(255, 255, 255, 1);
+}
+
+[data-theme="dark"] {
+  --body-bg: rgb(60, 60, 60);
+  --color: rgb(212, 207, 207);
+  --body-bg-mb: rgb(60, 60, 60);
+  --content-bg-mb: rgb(113, 113, 113);
+  --table-bg: rgb(100, 100, 100);
+  --thead-line: rgb(70, 70, 70);
+  --table-day: rgb(70, 70, 70);
+  --pagination-current-page: rgb(200, 200, 200);
+  --input-color: rgb(79, 79, 79);
+  --input-outline: rgb(218, 218, 218);
+  --color-btn-theme: rgba(54, 52, 59, 1);
+  --color-btn-theme-border: rgba(147, 143, 153, 1);
+  --color-btn-theme-in: rgba(147, 143, 153, 1);
+}

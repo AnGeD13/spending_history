@@ -1,0 +1,14 @@
+.icon {
+  position: absolute;
+  right: 1px;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  color: var(--color-btn-theme);
+  border-radius: 50%;
+  background-color: var(--color-btn-theme-in);
+}
+
+.icon svg {
+  transform: translateY(25%) translateX(0%);
+}

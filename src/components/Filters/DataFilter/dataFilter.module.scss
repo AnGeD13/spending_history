@@ -12,9 +12,44 @@
 .filterData {
   width: 100px;
   height: 25px;
-  color: rgb(191, 191, 191);
+  color: var(--input-color);
   border-radius: 5px;
   border: 1px solid currentColor;
   padding: 4px;
   font-size: 10px;
+}
+
+.filterData::placeholder {
+  color: currentColor;
+}
+
+.filterData:focus {
+  outline: none;
+  border-color: var(--input-outline);
+}
+
+.filterData::-webkit-inner-spin-button, 
+.filterData::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.filterData {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 700px) {
+  .filterSection {
+    row-gap: 15px;
+  }
+  
+  .dataSection {
+    column-gap: 20px;
+  }
+  
+  .filterData {
+    width: 114px;
+    height: 35px;
+    font-size: 14px;
+  }
 }

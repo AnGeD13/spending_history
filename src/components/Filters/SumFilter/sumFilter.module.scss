@@ -12,7 +12,7 @@
 .filterNumber {
   width: 100px;
   height: 25px;
-  color: rgb(191, 191, 191);
+  color: var(--input-color);
   border-radius: 5px;
   border: 1px solid currentColor;
   padding: 4px;
@@ -25,7 +25,7 @@
 
 .filterNumber:focus {
   outline: none;
-  border-color: grey;
+  border-color: var(--input-outline);
 }
 
 .filterNumber::-webkit-inner-spin-button, 
@@ -36,4 +36,21 @@
 
 .filterNumber {
   -moz-appearance: textfield;
+}
+
+@media (max-width: 700px) {
+  .filterSection {
+    row-gap: 15px;
+  }
+  
+  .numberSection {
+    column-gap: 20px;
+  }
+  
+  .filterNumber {
+    width: 114px;
+    height: 35px;
+    padding: 7px;
+    font-size: 14px;
+  }
 }

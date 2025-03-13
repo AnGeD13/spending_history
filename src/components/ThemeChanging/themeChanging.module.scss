@@ -1,0 +1,17 @@
+.top {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 64px;
+  padding-inline: 16px;
+}
+
+.btnTheme {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  background-color: var(--color-btn-theme);
+  border: 2px solid var(--color-btn-theme-border);
+  border-radius: 100px;
+  cursor: pointer;
+}
