@@ -1,0 +1,20 @@
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.dataSection {
+  display: flex;
+  column-gap: 15px;
+}
+
+.filterData {
+  width: 100px;
+  height: 25px;
+  color: rgb(191, 191, 191);
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  padding: 4px;
+  font-size: 10px;
+}

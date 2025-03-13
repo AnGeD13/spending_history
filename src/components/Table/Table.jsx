@@ -1,9 +1,33 @@
-import styles from "./table.module.scss";
 import { getHoursAndMinutes } from "../../utils/getHourAndMinutes";
 import { getDayAndMonth } from "../../utils/getDayAndMonth";
+import { useState } from "react";
+import styles from "./table.module.scss";
 
+
+const getPaginatedData = (data, currentPage, itemsPerPage) => {
+  const startIndex = (currentPage - 1)*itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  return data.slice(startIndex, endIndex);
+}
 
 export default function Table({transactions, changeSortOrder}) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 30;
+
+  const flatItems = Object.values(transactions).flat();
+  const paginatedItems = getPaginatedData(flatItems, currentPage, itemsPerPage);
+
+  const groupedByDate = paginatedItems.reduce((acc, item) => {
+    const date = new Date(item.date);
+    const dateKey = date.toISOString().split('T')[0];
+    if (!acc[dateKey]) {
+      acc[dateKey] = [];
+    }
+    acc[dateKey].push(item);
+    acc[dateKey].sort((a, b) => new Date(a.date) - new Date(b.date));
+    return acc;
+  }, {});
+
   const NoTransactions = Object.values(transactions).every(items => items.length === 0);
 
   const onHandleChangeSort = (event) => {
@@ -11,42 +35,69 @@ export default function Table({transactions, changeSortOrder}) {
     changeSortOrder();
   }
 
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(flatItems.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <div className={styles.tableWrapper}>
-      <div className={styles.table}>
-        <div className={styles.thead}>
-          <p className={styles.leftHeading}>
-            Время{' '}
-            <button className={styles.btnChangeSort} onClick={onHandleChangeSort}></button>
-          </p>
-          <p className={styles.centerHeading}>Описание</p>
-          <p className={styles.rightHeading}>Сумма</p>
-        </div>
-        {NoTransactions &&
-          <p className={styles.nothingFound}>Ничего не найдено</p>
-        }
-        {!NoTransactions && Object.entries(transactions).map(([day, items], index) => {
-          if (items.length > 0) {
-            return (
-            <div key={day}>
-              <div key={`day-${index}`} className={styles.tableDate}>
-                {getDayAndMonth(day)}
-              </div>
-              <ul key={`list-${index}`} className={styles.dataWrapper}>
-                  {/* TODO delete slice */}
-                {items.slice(0, 3).map(item => (
-                  <li key={item.date} className={styles.tableRow}>
-                    <p className={styles.usualTd}>{getHoursAndMinutes(item.date)}</p>
-                    <p className={styles.usualTd}>{item.description}</p>
-                    <p className={styles.rightLine}>{item.sum < 0 ? item.sum : `+${item.sum}`}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>)
-            }
-          })
-        }
+    <>
+      <div className={styles.pagination}>
+        <button 
+          className={styles.paginationBtn}
+          onClick={handlePrevPage}
+        >
+          {'<'}
+        </button>
+        <button 
+          className={styles.paginationBtn}
+          onClick={handleNextPage}
+        >
+          {'>'}
+        </button>
       </div>
-    </div>
+      <div className={styles.tableWrapper}>
+        <div className={styles.table}>
+          <div className={styles.thead}>
+            <p className={styles.leftHeading}>
+              Время{' '}
+              <button className={styles.btnChangeSort} onClick={onHandleChangeSort}></button>
+            </p>
+            <p className={styles.centerHeading}>Описание</p>
+            <p className={styles.rightHeading}>Сумма</p>
+          </div>
+          {NoTransactions &&
+            <p className={styles.nothingFound}>Ничего не найдено</p>
+          }
+          {!NoTransactions && Object.entries(groupedByDate).map(([day, items], index) => {
+            if (items.length > 0) {
+              return (
+              <div key={day}>
+                <time key={`day-${index}`} className={styles.tableDate} dateTime={day}>
+                  {getDayAndMonth(day)}
+                </time>
+                <ul key={`list-${index}`} className={styles.dataWrapper}>
+                  {items.map(item => (
+                    <li key={item.date} className={styles.tableRow}>
+                      <time dateTime={item.date}>{getHoursAndMinutes(item.date)}</time>
+                      <p>{item.description}</p>
+                      <p className={styles.rightLine}>{item.sum < 0 ? item.sum : `+${item.sum}`}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>)
+              }
+            })
+          }
+        </div>
+      </div>
+    </>
   )
 }
