@@ -1,4 +1,4 @@
-import { TRANSACTION_TYPES } from "../../data/constants";
+import { TRANSACTION_TYPES } from "@data/constants";
 import styles from "./transactionTypes.module.scss";
 
 export default function TransactionTypes({selectedTypes, setSelectedTypes}) {

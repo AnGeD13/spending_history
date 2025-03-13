@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
-import Title from "../components/Title/Title"
-import Filters from '../components/Filters/Filters/Filters';
-import Table from '../components/Table/Table';
-import { groupedByDay, sortedDaysAsc, sortedDaysDesc } from '../utils/groupingAndSortData';
+import Title from "@components/Title/Title";
+import Filters from '@components/Filters/Filters/Filters';
+import Table from '@components/Table/Table';
+import { groupedByDay, sortedDaysAsc, sortedDaysDesc } from '@utils/groupingAndSortData';
+import { 
+  INITIAL_PAGE, INITIAL_MIN_SUM, 
+  INITIAL_MAX_SUM, INITIAL_FIRST_DATE,
+  INITIAL_LAST_DATE
+} from '@data/constants';
 import styles from './app.module.scss';
 
-const INITIAL_PAGE = 1;
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const [transactions, setTransactions] = useState({});
-  const [minSum, setMinSum] = useState(0);
-  const [maxSum, setMaxSum] = useState(null);
-  const [firstDate, setFirstDate] = useState(null);
-  const [lastDate, setLastDate] = useState(null);
+  const [minSum, setMinSum] = useState(INITIAL_MIN_SUM);
+  const [maxSum, setMaxSum] = useState(INITIAL_MAX_SUM);
+  const [firstDate, setFirstDate] = useState(INITIAL_FIRST_DATE);
+  const [lastDate, setLastDate] = useState(INITIAL_LAST_DATE);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [sortOrder, setSortOrder] = useState(sortedDaysAsc);
 

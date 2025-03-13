@@ -1,19 +1,13 @@
+import { getPagesforPagination } from "@utils/getPagesForPagination";
 import styles from "./pagination.module.scss";
 
-const getPages = (minPage, maxPage) => {
-  let pages = [];
-  for (let i=minPage; i<=maxPage; i++) {
-    pages.push(i);
-  }
-  return pages;
-}
 
 export default function Pagination({
   totalPages, currentPage, setCurrentPage
 }) {
   const minPage = Math.max(currentPage - 2, 1);
   const maxPage = Math.min(totalPages, currentPage + 2);
-  const pages = getPages(minPage, maxPage);
+  const pages = getPagesforPagination(minPage, maxPage);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {

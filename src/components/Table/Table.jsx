@@ -1,34 +1,17 @@
-import { getHoursAndMinutes } from "../../utils/getHourAndMinutes";
-import { getDayAndMonth } from "../../utils/getDayAndMonth";
-import styles from "./table.module.scss";
+import { getHoursAndMinutes } from "@utils/getHourAndMinutes";
+import { getDayAndMonth } from "@utils/getDayAndMonth";
 import Pagination from "../Pagination/Pagination";
+import { getPaginatedData } from "@utils/getPaginatedData";
+import styles from "./table.module.scss";
+import { groupData } from "@utils/groupingAndSortData";
 
-
-const getPaginatedData = (data, currentPage, itemsPerPage) => {
-  const startIndex = (currentPage - 1)*itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  return data.slice(startIndex, endIndex);
-}
 
 export default function Table({
   currentPage, setCurrentPage, transactions, changeSortOrder
 }) {
-  const itemsPerPage = 30;
 
-  const flatItems = Object.values(transactions).flat();
-  const totalPages = Math.ceil(flatItems.length / itemsPerPage);
-  const paginatedItems = getPaginatedData(flatItems, currentPage, itemsPerPage);
-
-  const groupedByDate = paginatedItems.reduce((acc, item) => {
-    const date = new Date(item.date);
-    const dateKey = date.toISOString().split('T')[0];
-    if (!acc[dateKey]) {
-      acc[dateKey] = [];
-    }
-    acc[dateKey].push(item);
-    acc[dateKey].sort((a, b) => new Date(a.date) - new Date(b.date));
-    return acc;
-  }, {});
+  const [paginatedItems, totalPages] = getPaginatedData(transactions, currentPage);
+  const groupedByDate = groupData(paginatedItems);
 
   const NoTransactions = Object.values(transactions).every(items => items.length === 0);
 

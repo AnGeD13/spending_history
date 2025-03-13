@@ -1,35 +1,25 @@
-import { validateNumberInput } from "../../../utils/validateNumberInput";
+import { validateNumberInput } from "@utils/validateNumberInput";
 import styles from "./sumFilter.module.scss";
+import { INITIAL_MAX_SUM, INITIAL_MIN_SUM } from "@data/constants";
 
 export default function SumFilter({setMinSum, setMaxSum}) {
-
-  const getMaxSum = (value) => {
-    if (isNaN(value)) {
-      setMaxSum(null);
-    }
-    else {
-      setMaxSum(value);
-    }
-  };
-
-  const getMinSum = (value) => {
-    if (isNaN(value)) {
-      setMinSum(0);
-    }
-    else {
-      setMinSum(value);
-    }
-  };
-
-  const changeInput = (event, param) => {
-    if (!isNaN(event.target.value)) {
+  const getMinSum = (event) => {
+    if (event.target.value) {
       event.target.value = parseFloat(event.target.value);
+      setMinSum(event.target.value);
     }
-    if (param === "min") {
-      getMinSum(event.target.value);
+    else {
+      setMinSum(INITIAL_MIN_SUM);
     }
-    else if (param === "max") {
-      getMaxSum(event.target.value);
+  };
+
+  const getMaxSum = (event) => {
+    if (event.target.value) {
+      event.target.value = parseFloat(event.target.value);
+      setMaxSum(event.target.value);
+    }
+    else {
+      setMaxSum(INITIAL_MAX_SUM);
     }
   };
 
@@ -42,14 +32,14 @@ export default function SumFilter({setMinSum, setMaxSum}) {
           type="number" 
           placeholder="От"
           onKeyDown={validateNumberInput}
-          onBlur={(event) => changeInput(event, "min")}
+          onBlur={(event) => getMinSum(event)}
         />
         <input 
           className={styles.filterNumber}
           type="number" 
           placeholder="До"
           onKeyDown={validateNumberInput}
-          onBlur={(event) => changeInput(event, "max")}
+          onBlur={(event) => getMaxSum(event)}
         />
       </div>
     </section>

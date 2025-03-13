@@ -1,18 +1,28 @@
+import { DAY_IN_MS, INITIAL_FIRST_DATE, INITIAL_LAST_DATE } from "@data/constants";
 import styles from "./dataFilter.module.scss";
 
 export default function DataFilter({setFirstDate, setLastDate}) {
   const getFirstDate = (event) => {
-    const value = new Date(event.target.value);
-    const isoFormat = value.toISOString();
-    setFirstDate(isoFormat);
+    if (event.target.value) {
+      const value = new Date(event.target.value);
+      const isoFormat = value.toISOString();
+      setFirstDate(isoFormat);
+    }
+    else {
+      setFirstDate(INITIAL_FIRST_DATE);
+    }
   };
 
   const getLastDate = (event) => {
-    const day = 86400000;
-    const value = new Date(event.target.value);
-    value.setTime(value.getTime() + day);
-    const isoFormat = value.toISOString();
-    setLastDate(isoFormat);
+    if (event.target.value) {
+      const value = new Date(event.target.value);
+      value.setTime(value.getTime() + DAY_IN_MS);
+      const isoFormat = value.toISOString();
+      setLastDate(isoFormat);
+    }
+    else {
+      setLastDate(INITIAL_LAST_DATE);
+    }
   };
 
   return (
