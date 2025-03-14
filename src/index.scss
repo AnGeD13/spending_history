@@ -25,6 +25,46 @@ h3 {
   font-size: 16px;
 }
 
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.inputSection {
+  display: flex;
+  column-gap: 15px;
+}
+
+.filterInput {
+  width: 100px;
+  height: 25px;
+  color: var(--input-color);
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  padding: 4px;
+  font-size: 10px;
+}
+
+.filterInput::placeholder {
+  color: currentColor;
+}
+
+.filterInput:focus {
+  outline: none;
+  border-color: var(--input-outline);
+}
+
+.filterInput::-webkit-inner-spin-button, 
+.filterInput::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.filterInput {
+  -moz-appearance: textfield;
+}
+
 @media (max-width: 700px) {
   body {
     background-color: var(--body-bg-mb);
@@ -44,5 +84,19 @@ h3 {
   h3 {
     font-size: 20px;
     letter-spacing: 0.35px;
+  }
+
+  .filterSection {
+    row-gap: 15px;
+  }
+  
+  .inputSection {
+    column-gap: 20px;
+  }
+  
+  .filterInput {
+    width: 114px;
+    height: 35px;
+    font-size: 14px;
   }
 }

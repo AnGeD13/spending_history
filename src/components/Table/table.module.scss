@@ -26,16 +26,12 @@
   background-color: var(--thead-line);
 }
 
-.leftHeading {
+.left {
   text-align: left;
   padding-bottom: 5px;
 }
 
-.centerHeading {
-  text-align: center;
-}
-
-.rightHeading {
+.right {
   text-align: right;
 }
 
@@ -59,10 +55,6 @@
   grid-template-columns: 40px auto auto;
   font-size: 12px;
   padding-left: 5px;
-}
-
-.rightLine {
-  text-align: right;
 }
 
 .nothingFound {

@@ -30,12 +30,12 @@ export default function Table({
       <div className={styles.tableWrapper}>
         <div className={styles.table}>
           <div className={styles.thead}>
-            <p className={styles.leftHeading}>
+            <p className={styles.left}>
               Время{' '}
               <button className={styles.btnChangeSort} onClick={onHandleChangeSort}></button>
             </p>
-            <p className={styles.centerHeading}>Описание</p>
-            <p className={styles.rightHeading}>Сумма</p>
+            <p>Описание</p>
+            <p className={styles.right}>Сумма</p>
           </div>
           {NoTransactions &&
             <p className={styles.nothingFound}>Ничего не найдено</p>
@@ -52,7 +52,7 @@ export default function Table({
                     <li key={item.date} className={styles.tableRow}>
                       <time dateTime={item.date}>{getHoursAndMinutes(item.date)}</time>
                       <p>{item.description}</p>
-                      <p className={styles.rightLine}>{item.sum < 0 ? item.sum : `+${item.sum}`}</p>
+                      <p className={styles.right}>{item.sum < 0 ? item.sum : `+${item.sum}`}</p>
                     </li>
                   ))}
                 </ul>

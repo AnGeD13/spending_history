@@ -1,5 +1,4 @@
 import { validateNumberInput } from "@utils/validateNumberInput";
-import styles from "./sumFilter.module.scss";
 import { INITIAL_MAX_SUM, INITIAL_MIN_SUM } from "@data/constants";
 
 export default function SumFilter({setMinSum, setMaxSum}) {
@@ -24,18 +23,18 @@ export default function SumFilter({setMinSum, setMaxSum}) {
   };
 
   return (
-    <section className={styles.filterSection}>
+    <section className="filterSection">
       <h3>Сумма операции</h3>
-      <div className={styles.numberSection}>
+      <div className="inputSection">
         <input 
-          className={styles.filterNumber}
+          className="filterInput"
           type="number" 
           placeholder="От"
           onKeyDown={validateNumberInput}
           onBlur={(event) => getMinSum(event)}
         />
         <input 
-          className={styles.filterNumber}
+          className="filterInput"
           type="number" 
           placeholder="До"
           onKeyDown={validateNumberInput}

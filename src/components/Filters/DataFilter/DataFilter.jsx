@@ -1,5 +1,4 @@
 import { DAY_IN_MS, INITIAL_FIRST_DATE, INITIAL_LAST_DATE } from "@data/constants";
-import styles from "./dataFilter.module.scss";
 
 export default function DataFilter({setFirstDate, setLastDate}) {
   const getFirstDate = (event) => {
@@ -26,16 +25,16 @@ export default function DataFilter({setFirstDate, setLastDate}) {
   };
 
   return (
-    <section className={styles.filterSection}>
+    <section className="filterSection">
       <h3>Дата</h3>
-      <div className={styles.dataSection}>
+      <div className="inputSection">
         <input 
-          className={styles.filterData}
+          className="filterInput"
           type="date" 
           onChange={getFirstDate}
         />
         <input 
-          className={styles.filterData}
+          className="filterInput"
           type="date"
           onChange={getLastDate} 
         />
